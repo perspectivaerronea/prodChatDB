@@ -1,10 +1,10 @@
 const socket = io.connect();
 
 class Producto {
-    constructor(title, price, thumbnail, id) {
-        this.title = title;
-        this.price = price;
-        this.thumbnail = thumbnail;
+    constructor(titulo, precio, foto, id) {
+        this.titulo = titulo;
+        this.precio = precio;
+        this.foto = foto;
         this.id = id || 0;
     }
 };
@@ -12,9 +12,9 @@ class Producto {
 function render(data) {
     const html = data.map((elem, index) => {
         return (`<div>
-            <strong>${elem.author}</strong>:<br>  
+            <strong>${elem.autor}</strong>:<br>  
             <span style="color: brown; font-size:12px">${elem.fechaHora}</span><br> 
-            <em style="color: green">${elem.text}</em> </div>`)
+            <em style="color: green">${elem.texto}</em> </div>`)
     }).join(" ");
     document.getElementById('mensajes').innerHTML = html;
 }
@@ -23,9 +23,9 @@ function renderTabla(listaProductos) {
     const html = ((listaProductos.length>0)?listaProductos.map((prod, index) => {
         return (`
         <tr >
-            <td width="25%">${prod.title}</td>
-            <td width="10%">${prod.price}</td>
-            <td width="65%"><img class="rounded mx-auto d-block" src="${prod.thumbnail}" width="530px" height="300px" /></td>                
+            <td width="25%">${prod.titulo}</td>
+            <td width="10%">${prod.precio}</td>
+            <td width="65%"><img class="rounded mx-auto d-block" src="${prod.foto}" width="530px" height="300px" /></td>                
         </tr>
             `)
     }).join(" ") : `<td colspan=3>No hay productos</td>`);    
@@ -46,9 +46,9 @@ function addMessage(e) {
     const fecha = new Date();
 
     const mensaje = {
-        author: document.getElementById('username').value,
+        autor: document.getElementById('username').value,
         fechaHora: `${fecha.getDay()}/${fecha.getMonth()}/${fecha.getFullYear()} ${fecha.getHours()}:${fecha.getMinutes()}:${fecha.getSeconds()} `,
-        text: document.getElementById('texto').value
+        texto: document.getElementById('texto').value
     };    
 
     socket.emit('nuevoMensaje', mensaje);
