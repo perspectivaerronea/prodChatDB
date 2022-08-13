@@ -100,8 +100,7 @@ class Contenedor {
         try {
             contenido = await this.obtenerRegistros();
         }
-        catch (error) {
-            // console.log(`El archivo no existe, se va a pasar a la creación del mismo | Nombre del Archivo: ${this.arch}`);
+        catch (error) {            
             console.log(error);
         }
 
